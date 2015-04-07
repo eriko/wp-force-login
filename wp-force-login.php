@@ -35,7 +35,7 @@ function v_getUrl() {
 
 function v_in_pathbase($url,$whitelist){
     foreach ($whitelist as &$haystack){
-        if(strpos($haystack,$url)==1){
+        if(strpos($haystack,$url)==0){
             return true;
         }
     }
