@@ -75,6 +75,25 @@ function my_forcelogin_whitelist() {
 add_filter('v_forcelogin_whitelist', 'my_forcelogin_whitelist', 10, 1);
 `
 
+= How can I add exceptions for certain base paths? =
+
+You can specify an array of URLs to whitelist by adding the following filter to your functions.php file. Each URL must be absolute (as in, http://example.com/mypage/). Recommended: site_url( '/mypage/' ).
+
+`
+/**
+ * Filter Force Login to allow exceptions for specific URLs.
+ *
+ * @return array An array of partial paths starting from the base path
+ **/
+function my_forcelogin_whitelist_path() {
+  return array(
+    site_url( '/wp-json/frm/forms/' ),
+    site_url( '/wp-json/frm/entries/' )
+  );
+}
+add_filter('v_forcelogin_whitelist_path', 'my_forcelogin_whitelist', 10, 1);
+`
+
 
 == Changelog ==
 
