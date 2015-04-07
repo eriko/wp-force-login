@@ -48,9 +48,10 @@ function v_forcelogin() {
         $whitelist = apply_filters('v_forcelogin_whitelist', array());
         $whitelist_path = apply_filters('v_forcelogin_whitelist_path', array());
         $redirect_url = apply_filters('v_forcelogin_redirect', $url);
-    if( preg_replace('/\?.*/', '', $url) != preg_replace('/\?.*/', '', wp_login_url()) && !in_array($url, $whitelist_path) ) {
-      wp_safe_redirect( wp_login_url( $redirect_url ), 302 ); exit();
+    if(preg_replace('/\?.*/', '', $url) != preg_replace('/\?.*/', '', wp_login_url()) && (!in_array($url, $whitelist) || !v_in_pathbase($url, $whitelist_path))) {
+        wp_safe_redirect( wp_login_url( $redirect_url ), 302 ); exit();
     }
+
   }
 }
 add_action('init', 'v_forcelogin');
